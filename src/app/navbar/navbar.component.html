@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg bg-info fixed-top ">
+  <a class="navbar-brand ml-3 font-weight-bold text-white" href="/home" style="font-family: 'Courgette', cursive;"><i class="fa pr-1">&#xf086;</i>BloggerStop</a>
+  <form action="/action_page.php" class="nav navbar-nav navbar-right mr-auto ml-auto form-inline">
+    <div class="form-group">
+      <input type="text" class="form-control text-center " id="searched" placeholder="Search By Name, Title or Content..." size="40" [(ngModel)]="searchedItem" [ngModelOptions]="{ standalone:true }">
+    </div>
+    <button class="btn btn-warning ml-1" (click)="searchOnClick()" type="submit"><i class="fa fa-search"></i>Search!</button>
+  </form>
+  <ul class="nav navbar-right mr-2"  >
+    <li class="nav-item" ><a class="nav-link text-white" href="/profile"><i class="fa pr-1">&#xf118;</i>{{user.name}}</a></li>
+    <li class="nav-item" ><a class="nav-link text-white" href="/feed"><i class="fa pr-1">&#xf015;</i> Home</a></li>
+    <li class="nav-item dropdown" >
+      <a class="nav-link text-white" href="/addPost"><i class="fa p-1">&#xf0fe;</i>New Post</a>
+    </li>
+    <li class="nav-item dropdown" >
+      <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href=""><i class="fa p-1">&#xf0ea;</i>Account</a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="profile"><i class="fa pr-1">&#xf2c1;</i>Profile</a></li>
+        <li><a class="dropdown-item" href="#"><i class="fa pr-1">&#xf085;</i>Settings</a></li>
+        <li><a class="dropdown-item" href="#"><i class="fa pr-1">&#xf03b;</i>Logout</a></li>
+      </ul>
+    </li>
+
+
+  </ul>
+</nav>
+
+
+

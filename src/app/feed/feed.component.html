@@ -1,0 +1,80 @@
+<app-navbar (childEvent)="this.blogs=$event"></app-navbar>
+<div class="container-fluid mt-5" style="padding-bottom: 100px; background-color:#f2f8fa ">
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="bg-white mt-4 mb-4 position-fixed" style="padding-right: 70px; padding-left: 70px; box-shadow:3px 3px 7px grey; ">
+        <h2 class="text-left ml-4 text-black-50 font1 mt-3">Other Features</h2>
+        <hr>
+        <!--<a class="btn btn-info text-white w-100 mb-3"><i class="fa p-1">&#xf0c0;&nbsp;</i>Create Group</a>-->
+        <a class="btn btn-info text-white w-100 mb-3" (click)="seeFollowers()">Followers</a>
+        <a class="btn btn-info text-white w-100 mb-3" (click)="seeFollowing()">Following</a>
+        <div class="bg-white mt-4 mb-4  p-3" style="padding-right: 70px; padding-left: 70px;">
+          <h2 class="text-left ml-4 text-black-50 font1 mt-3">Search By User</h2>
+          <hr>
+          <div >
+            <form class="form-inline">
+          <input type="text" class="form-control text-center " id="searched" name="searched" placeholder="Enter username" [(ngModel)]="searchUser" [ngModelOptions]="{standalone: true}">
+          <button class="btn btn-info ml-2" (click)="searchByUser()">Search</button>
+            </form>
+            <div>
+            <div *ngFor="let u of allUsers" class="d-flex mt-3">
+              <div class="ml-4">
+                <div class="mt-3"><b>{{u.name}}</b></div>
+                <small class="">{{u.email}}</small>
+              </div>
+              <div><button class="btn btn-info ml-5 mt-3" (click)="viewProfile(u.userId)">View Profile</button></div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="row">
+        <div class="col-sm-12 mt-3">
+
+          <div *ngFor="let blog of blogs.slice().reverse()" style="box-shadow:5px 3px 7px grey;">
+            <div >
+                <div *ngIf=" blog.private==false || blog.userId.userId == user.userId || checkFollowing(blog.userId.userId) ">
+                  <div  class="bg-white m-2 p-3">
+                    <div class="d-flex">
+                      <div>
+                        <div class="font-weight-bold" style="font-size: 20px;">{{blog.userId.name}}</div>
+                        <div class="font-weight text-black-50">{{blog.title}}</div>
+                      </div>
+                      <div class="ml-auto">
+                        <div class="dropdown dropleft float-right" *ngIf="this.user.email === blog.userId.email">
+                          <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown">
+                            ...
+                          </button>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" (click)="editBlog(blog.postId)">Edit</a>
+                            <a *ngIf="blog.private==false" class="dropdown-item" (click)="makePrivate(blog.postId)">Private</a>
+                            <a *ngIf="blog.private" class="dropdown-item" (click)="makePublic(blog.postId)">Private</a>
+                            <a class="dropdown-item" (click)="deleteBlog(blog.postId)">Delete</a>
+                          </div>
+                        </div>
+                        <div>
+                          <small class="text-dark"><i class="fa p-1">&#xf0ac;&nbsp;</i>{{blog.date | date: 'shortDate'}}</small>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <p class="pb-3">{{blog.content}}</p>
+                    <small><a (click)="viewPost(blog.postId)">View Comments or make Comments</a></small>
+                  </div>
+
+
+                </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>

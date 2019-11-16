@@ -1,0 +1,49 @@
+<app-navbar></app-navbar>
+<div class="justify-content-center mx-5 mt-5 p-4 d-flex flex-row topMargin">
+ <div class="mr-5 my-4">
+   <img src="../../assets/img.jpg" style="border-radius: 40%">
+ </div>
+  <div>
+    <div class="mx-3 my-5">
+      <h3>{{user.name}}</h3>
+      <h6>{{user.email}}</h6>
+      <div class="d-flex mt-4 ml-n2">
+        <div class="mx-3 "><a href="/profile" class="text-decoration-none text-dark"><b>{{this.blogslength}}</b> No Of Posts</a></div>
+        <div class="mx-3"><a (click)="seeFollowers()" class="text-decoration-none text-dark">Followers</a></div>
+        <div class="mx-3"><a (click)="seeFollowing()" class="text-decoration-none text-dark">Following</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="mx-5 my-5">
+    <button class="btn btn-info" routerLink="/edituser">Edit Profile</button>
+  </div>
+</div>
+<div class=" p-4 mb-5" style="width: 70%; margin-left: 15%;  background-color:#f2f8fa ">
+    <h2 class="text-center">Posts</h2>
+    <div *ngFor="let blog of blogs">
+      <div class="d-flex m-3 ml-5 bg-white p-3">
+        <div class="my-4 ml-5">
+          <div><h4>{{blog.title}}</h4></div>
+          <div class="my-2">{{blog.content}}</div>
+        </div>
+        <div class="ml-auto my-4">
+          <div class="dropdown dropleft float-right">
+            <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown">
+              ...
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" (click)="editBlog(blog.postId)">Edit</a>
+              <a class="dropdown-item" (click)="makePublic(blog.postId)" *ngIf="blog.private==true; else privateElse;">Make Public</a>
+              <ng-template #privateElse>
+                <a class="dropdown-item" (click)="makePrivate(blog.postId)">Make Private</a>
+              </ng-template>
+              <a class="dropdown-item" (click)="deleteBlog(blog.postId)">Delete</a>
+            </div>
+          </div>
+          <div>
+            <small class="text-dark"><i class="fa p-1">&#xf0ac;&nbsp;</i>{{blog.date | date: 'shortDate'}}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
